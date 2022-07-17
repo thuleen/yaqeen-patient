@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import {
@@ -18,9 +19,20 @@ const HomePage = () => {
       <header className="App-header">
         <img src={logo} alt="yaqeen logo" style={styles.logo} />
         <Typography variant="body1" color="yellow">
-          simply delivers your test kit results
+          simply delivers your results
         </Typography>
+        <div style={{ height: "1rem" }} />
         <LoginForm />
+        <div style={{ height: "1rem" }} />
+        <Button
+          type="submit"
+          color="secondary"
+          form="login-form"
+          variant="contained"
+        >
+          submit
+        </Button>
+        <div style={{ height: "150px" }} />
       </header>
     </div>
   );
