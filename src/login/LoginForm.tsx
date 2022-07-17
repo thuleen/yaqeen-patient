@@ -15,9 +15,6 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<FormValues>({});
 
-  return <div>
-lofin form
-
-  </div>;
+  return <div>lofin form</div>;
 };
 export default LoginForm;
