@@ -18,7 +18,7 @@ const Result = () => {
     <>
       <Menubar handleLogout={() => console.log("logout")} />
       <div style={styles.summaryContainer}>
-        <Paper elevation={3} style={styles.summaryResultPaper}>
+        <Paper elevation={6} style={styles.summaryResultPaper}>
           <Typography variant="h6" color="primary">
             Results
           </Typography>

@@ -10,6 +10,7 @@ import "./App.css";
 import Result from "../result/Result";
 import logo from "../assets/yaqeen-logo.png";
 import styles from "./styles";
+import LoginForm from "../login/LoginForm";
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
         <Typography variant="body1" color="yellow">
           simply delivers your test kit results
         </Typography>
+        <LoginForm />
       </header>
     </div>
   );
