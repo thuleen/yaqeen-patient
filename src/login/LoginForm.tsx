@@ -9,6 +9,8 @@ import FormHelperText from "@mui/material/FormHelperText";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginPayload, login } from "../app/redux-saga/actions";
 
 type FormValues = {
   socialId: string;
@@ -21,14 +23,17 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({});
+  const dispatch = useDispatch();
+  const handleLogin = (payload: LoginPayload) => dispatch(login(payload));
 
   const handleIdTypeChange = (event: SelectChangeEvent) => {
     setIdType(event.target.value as string);
   };
 
   const onSubmit = handleSubmit((data: any) => {
-    console.log({ ...data, idType });
+    handleLogin({ ...data, idType });
   });
+
   return (
     <div
       style={{
@@ -44,11 +49,7 @@ const LoginForm = () => {
             defaultValue=""
             control={control}
             render={({ field }) => (
-              <FormControl
-                fullWidth
-                margin="normal"
-                variant="standard"
-              >
+              <FormControl fullWidth margin="normal" variant="standard">
                 <Input
                   id="socialId"
                   inputProps={{

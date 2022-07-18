@@ -28,5 +28,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontWeight: 600,
     textShadow: "-0.9px 0.7px 0.7px rgba(255, 255, 255, 1)",
   },
+  listItem: {},
+  listItemRedacted: {
+    filter: "blur(7px)",
+  },
 };
 export default styles;
