@@ -1,11 +1,13 @@
-import { LOGIN_OK, LOGOUT_OK } from "./action-type";
+import { LOGIN_AS_GUEST, LOGIN_OK, LOGOUT_OK } from "./action-type";
 
 export interface AppReducerState {
   token: string | null;
+  isGuest: boolean;
 }
 
 const initialState = {
   token: null,
+  isGuest: false,
 };
 
 export default function appReducer(
@@ -22,6 +24,13 @@ export default function appReducer(
       return {
         ...state,
         token: null,
+        isGuest: false,
+      };
+    case LOGIN_AS_GUEST:
+      return {
+        ...state,
+        token: null,
+        isGuest: true,
       };
     default:
       return state;

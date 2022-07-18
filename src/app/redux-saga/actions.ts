@@ -1,4 +1,11 @@
-import { INIT_APP, LOGIN, LOGIN_OK, LOGOUT, LOGOUT_OK } from "./action-type";
+import {
+  INIT_APP,
+  LOGIN_AS_GUEST,
+  LOGIN,
+  LOGIN_OK,
+  LOGOUT,
+  LOGOUT_OK,
+} from "./action-type";
 
 export interface InitAppPayload {
   appPassword: string;
@@ -7,6 +14,10 @@ export interface InitAppPayload {
 export const initApp = (payload: InitAppPayload) => ({
   type: INIT_APP,
   payload,
+});
+
+export const loginAsGuest = () => ({
+  type: LOGIN_AS_GUEST,
 });
 
 export interface LoginPayload {

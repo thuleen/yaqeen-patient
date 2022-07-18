@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import IconButton from "@mui/material/IconButton";
+import RedoIcon from "@mui/icons-material/Redo";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
@@ -14,15 +16,16 @@ import Result from "../result/Result";
 import logo from "../assets/yaqeen-logo.png";
 import styles from "./styles";
 import LoginForm from "../login/LoginForm";
-import { initApp, InitAppPayload } from "./redux-saga/actions";
+import { initApp, InitAppPayload, loginAsGuest } from "./redux-saga/actions";
 import { AppState } from "../redux-saga/store";
 
 interface HomePageProps {
   handleGuest: () => void;
+  toggleUpdate: () => void;
 }
 
 const HomePage = (props: HomePageProps) => {
-  const { handleGuest } = props;
+  const { handleGuest, toggleUpdate } = props;
   return (
     <div className="App">
       <header className="App-header">
@@ -49,6 +52,21 @@ const HomePage = (props: HomePageProps) => {
           </Button>
         </div>
         <div style={{ height: "150px" }} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="caption" color="white">
+            Version {import.meta.env.VITE_APP_VERSION}
+          </Typography>
+          <IconButton onClick={toggleUpdate}>
+            <RedoIcon fontSize="small" style={{ color: "white" }} />
+          </IconButton>
+        </div>
       </header>
     </div>
   );
@@ -57,30 +75,57 @@ const HomePage = (props: HomePageProps) => {
 function App() {
   const dispatch = useDispatch();
   const handleInit = (payload: InitAppPayload) => dispatch(initApp(payload));
-  const { token } = useSelector((state: AppState) => state.app);
-  const [isGuest, setIsGuest] = React.useState<boolean>(false);
-
-  const handleGuest = () => {
-      setIsGuest( true)
-  }
+  const handleGuest = () => dispatch(loginAsGuest());
+  const { token, isGuest } = useSelector((state: AppState) => state.app);
 
   React.useEffect(() => {
     handleInit({ appPassword: "ToReadFromEnvFile" });
     return () => {};
   }, []);
 
+  const toggleUpdate = () => {
+    if ("caches" in window) {
+      caches.keys().then((names) => {
+        names.forEach((name) => {
+          caches.delete(name);
+        });
+        window.location.reload();
+      });
+    }
+  };
+
   if (!token && isGuest) {
     return <Result />;
   }
 
   if (token && !isGuest) {
-    return <Result />;
+    return (
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage toggleUpdate={toggleUpdate} handleGuest={handleGuest} />
+          }
+        />
+        <Route path="/:sampleId" element={<Result />} />
+      </Routes>
+    );
   }
 
   return (
     <Routes>
-      <Route path="/" element={<HomePage handleGuest={handleGuest} />} />
-      <Route path="/:sampleId" element={<HomePage handleGuest={handleGuest} />} />
+      <Route
+        path="/"
+        element={
+          <HomePage toggleUpdate={toggleUpdate} handleGuest={handleGuest} />
+        }
+      />
+      <Route
+        path="/:sampleId"
+        element={
+          <HomePage toggleUpdate={toggleUpdate} handleGuest={handleGuest} />
+        }
+      />
     </Routes>
   );
 }

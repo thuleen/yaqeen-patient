@@ -21,7 +21,6 @@ type AppbarProps = {
 };
 
 const HomeAppbar = (props: AppbarProps) => {
-  const navigate = useNavigate();
   const { handleLogout } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
@@ -33,7 +32,7 @@ const HomeAppbar = (props: AppbarProps) => {
   };
 
   const toggleMenuItem = (pathName: string) => {
-    navigate(pathName);
+    // navigate(pathName);
     setOpenMenu((previousVal) => !previousVal);
   };
 
@@ -47,7 +46,6 @@ const HomeAppbar = (props: AppbarProps) => {
       <ConfirmLogoutDlg
         open={openConfDlg}
         handleConfirm={() => {
-          navigate("/");
           handleLogout();
         }}
         handleClose={() => setOpenConfDlg(false)}
@@ -80,9 +78,6 @@ const HomeAppbar = (props: AppbarProps) => {
               open={openMenu}
               onClose={toggleMenu}
             >
-              <MenuItem onClick={() => toggleMenuItem("/samples")}>
-                Samples
-              </MenuItem>
               <Divider />
               <MenuItem onClick={() => onLogout()}>Sign out...</MenuItem>
             </Menu>

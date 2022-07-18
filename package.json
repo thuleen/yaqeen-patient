@@ -1,8 +1,8 @@
 {
   "name": "yaqeen4patient",
-  "homepage": "https://thuleen.github.io/yaqeen-patient/",
+  "homepage": "https://yaqeen-patient.firebaseapp.com/",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.12",
   "type": "module",
   "scripts": {
     "dev": "vite",

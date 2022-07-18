@@ -1,12 +1,15 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Menubar from "../menubar";
 import styles from "./styles";
 import { AppState } from "../redux-saga/store";
+import { logout } from "../app/redux-saga/actions";
 
 const Result = () => {
   const { token } = useSelector((state: AppState) => state.app);
+  const dispatch = useDispatch();
+  const handleLogout = () => dispatch(logout());
 
   let activeSample = {
     name: "Muntal bin Jumut",
@@ -21,7 +24,7 @@ const Result = () => {
 
   return (
     <>
-      <Menubar handleLogout={() => console.log("logout")} />
+      <Menubar handleLogout={() => handleLogout()} />
       <div style={styles.summaryContainer}>
         <Paper elevation={6} style={styles.summaryResultPaper}>
           <Typography variant="h6" color="primary">

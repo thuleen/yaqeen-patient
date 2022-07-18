@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <BrowserRouter basename="/yaqeen-patient/">
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </Provider>
