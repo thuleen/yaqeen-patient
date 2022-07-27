@@ -29,7 +29,11 @@ const HomePage = (props: HomePageProps) => {
   const { toggleUpdate, errMsg } = props;
   return (
     <div className="App">
-      {errMsg ? <Alert icon={false} severity="error">{errMsg}</Alert> : null}
+      {errMsg ? (
+        <Alert icon={false} severity="error">
+          {errMsg}
+        </Alert>
+      ) : null}
       <header className="App-header">
         <img src={logo} alt="yaqeen logo" style={styles.logo} />
         <Typography variant="h5" color="yellow">
@@ -92,7 +96,7 @@ function App() {
   };
 
   if (samples) {
-    return <Result />;
+    return <Result sample={samples[samples.length - 1]} />;
   }
 
   return (

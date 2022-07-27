@@ -17,8 +17,7 @@ function* getPatientSamples(action: any): any {
     yield put(Action.getPatSamplesErr());
     return;
   }
-  if( res.status === "Error") {
-
+  if (res.status === "Error") {
     yield put(Action.getPatSamplesErr());
     return;
   }

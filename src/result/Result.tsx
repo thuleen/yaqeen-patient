@@ -6,21 +6,33 @@ import styles from "./styles";
 import { AppState } from "../store";
 import { logout } from "../redux-saga/actions";
 
-const Result = () => {
-  const { samples } = useSelector((state: AppState) => state.app);
+export interface Sample {
+  id?: number; // generated at API level
+  testType: string;
+  tagNo: string;
+  name: string | null; // patient name
+  mobileNo: string;
+  socialId: string;
+  idType: string;
+  photoUri: string | null;
+  pending: boolean;
+  lastActiveStep: number;
+  createdAt: string;
+  photoTakenAt: string; // date time photo was taken
+  result?: string;
+  updatedAt?: string;
+}
+
+const Result = (props: { sample: Sample }) => {
+  // const { samples } = useSelector((state: AppState) => state.app);
+  const { sample } = props;
   const dispatch = useDispatch();
   const handleLogout = () => dispatch(logout());
-
-  let sample = {
-    name: "Muntal bin Jumut",
-    idType: "Nric",
-    socialId: "12345677890",
-    tagNo: "007",
-    photoTakenAt: "2222/12/13",
-    interpretation:
-      "IgG: positive; IgM: negative; Ns1Ag: positive. Interpretation: you are between maternity ward and the grave, sickness is part of the deal. Turn on, tune in, drop out!",
-    samplePhotoDataUri: "",
-  };
+  let result: { interpretation: string } = { interpretation: "Error" };
+  let resultStr = sample.result;
+  if (resultStr) {
+    result = JSON.parse(resultStr);
+  }
 
   return (
     <>
@@ -28,9 +40,9 @@ const Result = () => {
       <div style={styles.summaryContainer}>
         <Paper elevation={6} style={styles.summaryResultPaper}>
           <Typography variant="h6" color="primary">
-            Results
+            Result(s)
           </Typography>
-          <Typography variant="body1">{sample.interpretation}</Typography>
+          <Typography variant="body1">{result.interpretation}</Typography>
         </Paper>
         <div
           style={{
@@ -52,7 +64,7 @@ const Result = () => {
           <Typography variant="caption" color="primary">
             Tested on:
           </Typography>
-          <Typography variant="body1">05 Apr 2022 09:45:12AM</Typography>
+          <Typography variant="body1">{sample.updatedAt}</Typography>
           <Typography variant="caption" color="primary">
             Test site:
           </Typography>
@@ -62,18 +74,20 @@ const Result = () => {
           <Typography variant="caption" color="primary">
             Test kit:
           </Typography>
-          <Typography variant="body1">
-            Dengue Virus Antigen Rapid Test kit
-          </Typography>
+          <Typography variant="body1">{sample.testType}</Typography>
         </div>
-        <div style={{ marginTop: "1rem" }}>
-          <img
-            style={{ width: "100%", height: "auto" }}
-            src={sample.samplePhotoDataUri}
-          />
-        </div>
-        <div style={styles.summaryPhotoTagNo}>Tag No#{sample.tagNo}</div>
-        <div style={styles.summaryPhotoTakenAt}>{sample.photoTakenAt}</div>
+        {sample.photoUri ? (
+          <div>
+            <div style={{ marginTop: "1rem" }}>
+              <img
+                style={{ width: "100%", height: "auto" }}
+                src={sample.photoUri}
+              />
+            </div>
+            <div style={styles.summaryPhotoTagNo}>Tag No#{sample.tagNo}</div>
+            <div style={styles.summaryPhotoTakenAt}>{sample.photoTakenAt}</div>
+          </div>
+        ) : null}
       </div>
     </>
   );
