@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from "@mui/material/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import RedoIcon from "@mui/icons-material/Redo";
@@ -28,7 +29,7 @@ const HomePage = (props: HomePageProps) => {
   const { toggleUpdate, errMsg } = props;
   return (
     <div className="App">
-      {errMsg ? errMsg : null}
+      {errMsg ? <Alert icon={false} severity="error">{errMsg}</Alert> : null}
       <header className="App-header">
         <img src={logo} alt="yaqeen logo" style={styles.logo} />
         <Typography variant="h5" color="yellow">

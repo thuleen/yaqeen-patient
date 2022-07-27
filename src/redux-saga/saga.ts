@@ -15,6 +15,12 @@ function* getPatientSamples(action: any): any {
   const res = yield call(Api.getPatientSamples, { ...action.payload });
   if (!res.result.samples) {
     yield put(Action.getPatSamplesErr());
+    return;
+  }
+  if( res.status === "Error") {
+
+    yield put(Action.getPatSamplesErr());
+    return;
   }
   yield put(Action.getPatSamplesOK({ samples: res.result.samples }));
 }
