@@ -10,7 +10,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginPayload, login } from "../app/redux-saga/actions";
+import { LoginPayload, login } from "../redux-saga/actions";
 
 type FormValues = {
   socialId: string;

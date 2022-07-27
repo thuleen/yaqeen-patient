@@ -11,10 +11,9 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import styles from "./styles";
+import "./index.css";
 import logo from "../assets/yaqeen-logo.png";
 import ConfirmLogoutDlg from "./ConfirmLogoutDlg";
-
-// const APPNAME = import.meta.env.VITE_APPNAME;
 
 type AppbarProps = {
   handleLogout: () => void;
@@ -32,7 +31,6 @@ const HomeAppbar = (props: AppbarProps) => {
   };
 
   const toggleMenuItem = (pathName: string) => {
-    // navigate(pathName);
     setOpenMenu((previousVal) => !previousVal);
   };
 
@@ -50,7 +48,7 @@ const HomeAppbar = (props: AppbarProps) => {
         }}
         handleClose={() => setOpenConfDlg(false)}
       />
-      <AppBar position="static" style={{ backgroundColor: "#079992" }}>
+      <AppBar position="static" className="menu">
         <Toolbar style={styles.toolbarContainer}>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div style={styles.logoContainer}>

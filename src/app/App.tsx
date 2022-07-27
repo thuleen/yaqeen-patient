@@ -16,8 +16,8 @@ import Result from "../result/Result";
 import logo from "../assets/yaqeen-logo.png";
 import styles from "./styles";
 import LoginForm from "../login/LoginForm";
-import { initApp, InitAppPayload, loginAsGuest } from "./redux-saga/actions";
-import { AppState } from "../redux-saga/store";
+import { initApp, InitAppPayload, loginAsGuest } from "../redux-saga/actions";
+import { AppState } from "../store";
 
 interface HomePageProps {
   handleGuest: () => void;
@@ -30,7 +30,7 @@ const HomePage = (props: HomePageProps) => {
     <div className="App">
       <header className="App-header">
         <img src={logo} alt="yaqeen logo" style={styles.logo} />
-        <Typography variant="body1" color="yellow">
+        <Typography variant="h5" color="yellow">
           simply delivers your results
         </Typography>
         <div style={{ height: "1rem" }} />
@@ -40,15 +40,11 @@ const HomePage = (props: HomePageProps) => {
         >
           <Button
             type="submit"
-            color="secondary"
+            color="primary"
             form="login-form"
             variant="contained"
           >
             submit
-          </Button>
-          <div style={{ width: "5px" }} />
-          <Button color="secondary" variant="outlined" onClick={handleGuest}>
-            continue as guest
           </Button>
         </div>
         <div style={{ height: "150px" }} />

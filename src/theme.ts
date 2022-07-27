@@ -37,7 +37,7 @@ const createColor = (mainColor: any) =>
 
 const theme = createTheme({
   palette: {
-    primary: createColor("#079992"),
+    primary: createColor("#3a7bd5"),
     secondary: createColor("#fbc531"),
     white: createColor("#ffffff"),
     yellow: createColor("#e1b12c"),

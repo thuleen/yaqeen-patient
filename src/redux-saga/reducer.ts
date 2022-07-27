@@ -1,8 +1,38 @@
-import { combineReducers } from "redux";
-import reducerApp from "../app/redux-saga/reducer";
+import * as ActionType from "./action-type";
 
-const reducer = combineReducers({
-  app: reducerApp,
-});
+export interface AppReducerState {
+  token: string | null;
+  isGuest: boolean;
+}
 
-export default reducer;
+const initialState = {
+  token: null,
+  isGuest: false,
+};
+
+export default function appReducer(
+  state: AppReducerState = initialState,
+  action: any
+) {
+  switch (action.type) {
+    case ActionType.LOGIN_OK:
+      return {
+        ...state,
+        token: action.payload.token,
+      };
+    case ActionType.LOGOUT_OK:
+      return {
+        ...state,
+        token: null,
+        isGuest: false,
+      };
+    case ActionType.LOGIN_AS_GUEST:
+      return {
+        ...state,
+        token: null,
+        isGuest: true,
+      };
+    default:
+      return state;
+  }
+}

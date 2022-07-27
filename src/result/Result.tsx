@@ -3,8 +3,8 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Menubar from "../menubar";
 import styles from "./styles";
-import { AppState } from "../redux-saga/store";
-import { logout } from "../app/redux-saga/actions";
+import { AppState } from "../store";
+import { logout } from "../redux-saga/actions";
 
 const Result = () => {
   const { token } = useSelector((state: AppState) => state.app);

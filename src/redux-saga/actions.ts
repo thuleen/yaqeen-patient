@@ -1,23 +1,16 @@
-import {
-  INIT_APP,
-  LOGIN_AS_GUEST,
-  LOGIN,
-  LOGIN_OK,
-  LOGOUT,
-  LOGOUT_OK,
-} from "./action-type";
+import * as ActionType from "./action-type";
 
 export interface InitAppPayload {
   appPassword: string;
 }
 
 export const initApp = (payload: InitAppPayload) => ({
-  type: INIT_APP,
+  type: ActionType.INIT_APP,
   payload,
 });
 
 export const loginAsGuest = () => ({
-  type: LOGIN_AS_GUEST,
+  type: ActionType.LOGIN_AS_GUEST,
 });
 
 export interface LoginPayload {
@@ -25,7 +18,7 @@ export interface LoginPayload {
   socialId: string;
 }
 export const login = (payload: LoginPayload) => ({
-  type: LOGIN,
+  type: ActionType.LOGIN,
   payload,
 });
 
@@ -34,14 +27,14 @@ export interface LoginOkPayload {
 }
 
 export const loginOK = (payload: LoginOkPayload) => ({
-  type: LOGIN_OK,
+  type: ActionType.LOGIN_OK,
   payload,
 });
 
 export const logout = () => ({
-  type: LOGOUT,
+  type: ActionType.LOGOUT,
 });
 
 export const logoutOK = () => ({
-  type: LOGOUT_OK,
+  type: ActionType.LOGOUT_OK,
 });
