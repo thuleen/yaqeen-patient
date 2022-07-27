@@ -38,3 +38,22 @@ export const logout = () => ({
 export const logoutOK = () => ({
   type: ActionType.LOGOUT_OK,
 });
+
+export interface GetPatientSamples {
+  idType: string;
+  socialId: string;
+}
+
+export const getPatSamples = (payload: GetPatientSamples) => ({
+  type: ActionType.GET_PTN_SMPLS,
+  payload,
+});
+
+export const getPatSamplesOK = (payload: { samples: [] }) => ({
+  type: ActionType.GET_PTN_SMPLS_OK,
+  payload,
+});
+
+export const getPatSamplesErr = () => ({
+  type: ActionType.GET_PTN_SMPLS_ERR,
+});

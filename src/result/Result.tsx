@@ -7,11 +7,11 @@ import { AppState } from "../store";
 import { logout } from "../redux-saga/actions";
 
 const Result = () => {
-  const { token } = useSelector((state: AppState) => state.app);
+  const { samples } = useSelector((state: AppState) => state.app);
   const dispatch = useDispatch();
   const handleLogout = () => dispatch(logout());
 
-  let activeSample = {
+  let sample = {
     name: "Muntal bin Jumut",
     idType: "Nric",
     socialId: "12345677890",
@@ -30,7 +30,7 @@ const Result = () => {
           <Typography variant="h6" color="primary">
             Results
           </Typography>
-          <Typography variant="body1">{activeSample.interpretation}</Typography>
+          <Typography variant="body1">{sample.interpretation}</Typography>
         </Paper>
         <div
           style={{
@@ -40,20 +40,14 @@ const Result = () => {
           <Typography variant="caption" color="primary">
             Patient name:
           </Typography>
-          <Typography
-            variant="body1"
-            style={token ? styles.listItem : styles.listItemRedacted}
-          >
-            {token ? activeSample.name : "Muntal Najib Razak Bangang"}
+          <Typography variant="body1" style={styles.listItem}>
+            {sample.name}
           </Typography>
           <Typography variant="caption" color="primary">
-            {token ? activeSample.idType : "Nric/Passport"}
+            {sample.idType}
           </Typography>
-          <Typography
-            style={token ? styles.listItem : styles.listItemRedacted}
-            variant="body1"
-          >
-            {token ? activeSample.socialId : "1234567890123456"}
+          <Typography style={styles.listItem} variant="body1">
+            {sample.socialId}
           </Typography>
           <Typography variant="caption" color="primary">
             Tested on:
@@ -75,13 +69,11 @@ const Result = () => {
         <div style={{ marginTop: "1rem" }}>
           <img
             style={{ width: "100%", height: "auto" }}
-            src={activeSample.samplePhotoDataUri}
+            src={sample.samplePhotoDataUri}
           />
         </div>
-        <div style={styles.summaryPhotoTagNo}>Tag No#{activeSample.tagNo}</div>
-        <div style={styles.summaryPhotoTakenAt}>
-          {activeSample.photoTakenAt}
-        </div>
+        <div style={styles.summaryPhotoTagNo}>Tag No#{sample.tagNo}</div>
+        <div style={styles.summaryPhotoTakenAt}>{sample.photoTakenAt}</div>
       </div>
     </>
   );

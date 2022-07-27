@@ -20,14 +20,15 @@ import { initApp, InitAppPayload, loginAsGuest } from "../redux-saga/actions";
 import { AppState } from "../store";
 
 interface HomePageProps {
-  handleGuest: () => void;
   toggleUpdate: () => void;
+  errMsg: string | null;
 }
 
 const HomePage = (props: HomePageProps) => {
-  const { handleGuest, toggleUpdate } = props;
+  const { toggleUpdate, errMsg } = props;
   return (
     <div className="App">
+      {errMsg ? errMsg : null}
       <header className="App-header">
         <img src={logo} alt="yaqeen logo" style={styles.logo} />
         <Typography variant="h5" color="yellow">
@@ -71,8 +72,7 @@ const HomePage = (props: HomePageProps) => {
 function App() {
   const dispatch = useDispatch();
   const handleInit = (payload: InitAppPayload) => dispatch(initApp(payload));
-  const handleGuest = () => dispatch(loginAsGuest());
-  const { token, isGuest } = useSelector((state: AppState) => state.app);
+  const { errMsg, samples } = useSelector((state: AppState) => state.app);
 
   React.useEffect(() => {
     handleInit({ appPassword: "ToReadFromEnvFile" });
@@ -90,37 +90,19 @@ function App() {
     }
   };
 
-  if (!token && isGuest) {
+  if (samples) {
     return <Result />;
-  }
-
-  if (token && !isGuest) {
-    return (
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage toggleUpdate={toggleUpdate} handleGuest={handleGuest} />
-          }
-        />
-        <Route path="/:sampleId" element={<Result />} />
-      </Routes>
-    );
   }
 
   return (
     <Routes>
       <Route
         path="/"
-        element={
-          <HomePage toggleUpdate={toggleUpdate} handleGuest={handleGuest} />
-        }
+        element={<HomePage toggleUpdate={toggleUpdate} errMsg={errMsg} />}
       />
       <Route
         path="/:sampleId"
-        element={
-          <HomePage toggleUpdate={toggleUpdate} handleGuest={handleGuest} />
-        }
+        element={<HomePage toggleUpdate={toggleUpdate} errMsg={errMsg} />}
       />
     </Routes>
   );

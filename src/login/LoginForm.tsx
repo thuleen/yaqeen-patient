@@ -10,7 +10,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginPayload, login } from "../redux-saga/actions";
+import { GetPatientSamples, getPatSamples } from "../redux-saga/actions";
 
 type FormValues = {
   socialId: string;
@@ -24,7 +24,8 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<FormValues>({});
   const dispatch = useDispatch();
-  const handleLogin = (payload: LoginPayload) => dispatch(login(payload));
+  const handleLogin = (payload: GetPatientSamples) =>
+    dispatch(getPatSamples(payload));
 
   const handleIdTypeChange = (event: SelectChangeEvent) => {
     setIdType(event.target.value as string);
